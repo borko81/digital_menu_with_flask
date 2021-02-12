@@ -1,0 +1,8 @@
+.mycenter {
+    float: center;
+}
+
+.mycontainer {
+    width: 40%;
+    margin: 0 auto;
+}
