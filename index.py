@@ -7,14 +7,14 @@ from collections import defaultdict
 '''
 TODO: add id to url, to generate menu from different id!
 '''
-OBJ_ID = 2
+OBJ_ID = 1
 
 # ----------Flas configuration ---------------
 app = Flask(__name__)
 
 # ---------Database connector ----------------
-con = fdb.connect(dsn=r'path',
-                  user='username', password='password')
+con = fdb.connect(dsn=r'C:\Users\borko\Desktop\Merdjan\MT.FDB',
+                  user='SYSDBA', password='masterkey')
 
 # ----------------SQL Selector ---------------------------
 RESTAURANT_NAME = f'''
@@ -26,7 +26,7 @@ select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
 from KITS
 inner join MENU
 inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
-where MENU.OBJ_ID = {OBJ_ID}
+where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = {OBJ_ID})
 order by 1
 '''
 
@@ -35,19 +35,19 @@ select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
 from KITS
 inner join MENU
 inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
-where MENU.OBJ_ID = %d and kinds.id = %d
+where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = %d) and kinds.id = %d
 order by 1
 '''
 
 
 TAKE_KINDS = f'''
 select
-kinds.id, kinds.name
+distinct(kinds.id), kinds.name
 from kits
 inner join kinds on kinds.id = kits.kind_id
 inner join menu
 on menu.kit_id = kits.id
-where MENU.OBJ_ID = {OBJ_ID} and kits.kind_id is not null
+where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = {OBJ_ID}) and kits.kind_id is not null
 order by 2
 '''
 
