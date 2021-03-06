@@ -1,8 +1,29 @@
-.mycenter {
-    float: center;
+* {
+    margin: 0;
+    padding: 0;
 }
 
 .mycontainer {
-    width: 40%;
+    width: 100%;
     margin: 0 auto;
+}
+
+.groupininfo {
+    font-size:x-small;
+    color: white;
+}
+
+.infoboxstyle {
+    height: 150px;
+    background: rgb(1,0,8);
+    background: linear-gradient(180deg, rgba(1,0,8,1) 3%, rgba(25,25,54,1) 39%, rgba(54,57,57,1) 72%);
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.myfooter {
+  bottom: 0;
 }
