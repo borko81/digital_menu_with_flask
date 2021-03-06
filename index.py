@@ -13,8 +13,8 @@ OBJ_ID = 2
 app = Flask(__name__)
 
 # ---------Database connector ----------------
-con = fdb.connect(dsn=r'C:\Users\Borko\Desktop\noto\touchsale.FDB',
-                  user='SYSDBA', password='masterkey')
+con = fdb.connect(dsn=r'path',
+                  user='username', password='password')
 
 # ----------------SQL Selector ---------------------------
 RESTAURANT_NAME = f'''
