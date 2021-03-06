@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<style>
+		.myimage {
+			height: 150px;
+			width: 150px;
+			margin: auto 5px;
+			border: 1px solid black;
+			clear: both;
+		}
+
+		img:hover {
+  			box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+		}
+
+		.textcenter{
+			text-align: center;
+		}
+
+		.mybottom{
+			margin-bottom: 0px;
+		}
+
+	</style>
+	<title>Меню</title>
+</head>
+<body>
+	<div class="mycontainer">
+		{% for group_name, values in data.recepidata.items() %}
+			<h5 class="card-title textcenter"><b>{{ group_name }}</b></h5>
+			{% for info in values %}
+			<div class="card">
+				<div class="card-horizontal">
+					<div class="img-square-wrapper">
+						{% if info[2] != '' %}
+							<img src="data:;base64,{{ info[2] }}" class="myimage" alt="...">
+						{% else %}
+							<img src="{{ url_for('static', filename='default.png') }}" class="myimage" alt="{{ data.rest_name[0] }}">
+						{% endif %}
+					</div>
+					<div class="card-body infoboxstyle">
+						<p class="groupininfo">{{ group_name|upper }}</p>
+						<h6 class="card-title" style="color:orange"><small>{{ info[0] }}</small></h6>
+						{% if info[3] %}
+							<p class="card-text" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
+						{% else %}
+
+						{% endif %}
+						<p class="myfooter" style="background: #black; color: orange;"><small><u>{{ info[1] }} лв</u></small></p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		{% endfor %}
+	</div>
+</body>
+</html>
