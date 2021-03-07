@@ -20,7 +20,12 @@
                   <ul class="list-group list-group-flush">
                         <li class="list-group-item mfont" style="background-color: #c0c0c0"><a href='{{ url_for("all_menu") }}' class="btn"><strong><p>ЗАРЕДИ МЕНЮТО</p></strong></a></li>
                     {% for group_name, gorup_id in data.items() %}
-                        <li class="list-group-item mfont"><a href='{{ url_for("load_kinds", id=gorup_id) }}' class="btn"><p>{{ group_name }}</p></a></li>
+                        {% if gorup_id[1] != '' %}
+                            <li class="list-group-item mfont"><a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn"><p>{{ group_name }}
+                            <img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="..."></p></a></li>
+                        {% else %}
+                        <li class="list-group-item mfont"><a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn"><p>{{ group_name }}
+                        {% endif %}
                     {% endfor %}
                   </ul>
                 </div>

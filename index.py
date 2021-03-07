@@ -42,11 +42,12 @@ order by 1
 
 TAKE_KINDS = f'''
 select
-distinct(kinds.id), kinds.name
+distinct(kinds.id), kinds.name, kind_icons.icon
 from kits
 inner join kinds on kinds.id = kits.kind_id
 inner join menu
 on menu.kit_id = kits.id
+left join kind_icons on kind_icons.id = kinds.icon_id
 where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = {OBJ_ID}) and kits.kind_id is not null
 order by 2
 '''
@@ -70,7 +71,7 @@ def get_data_from_database(kinds=None):
     for line in cur.fetchall():
         try:
             image = b64encode(line[3]).decode("utf-8")
-        except:
+        except TypeError:
             image = ''
         result[line[1]].append([line[0], line[2], image, line[4]])
     return result
@@ -81,7 +82,11 @@ def get_kinds_from_database():
     cur.execute(TAKE_KINDS)
     result = {}
     for line in cur.fetchall():
-        result[line[1]] = line[0]
+        try:
+            image = b64encode(line[2]).decode("utf-8")
+        except TypeError:
+            image = ''
+        result[line[1]] = [line[0], image]
     return dict(sorted(result.items()))
 
 
