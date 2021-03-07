@@ -27,3 +27,30 @@
 .myfooter {
   bottom: 0;
 }
+
+.mfont {
+  text-align: center;
+}
+
+.mfont p {
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: rokkit;
+  margin: auto 0;
+}
+
+.mfont2 {
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: rokkit;
+  margin: auto 0;
+}
+
+.mfont3 {
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: rokkit;
+  padding: 50px 0 0 0;
+}

@@ -51,13 +51,16 @@
 					</div>
 					<div class="card-body infoboxstyle">
 						<p class="groupininfo">{{ group_name|upper }}</p>
-						<h6 class="card-title" style="color:orange"><small>{{ info[0] }}</small></h6>
+						<h6 class="card-title mfont2" style="color:orange"><small>{{ info[0] }}</small></h6>
+						{# 
 						{% if info[3] %}
 							<p class="card-text" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
 						{% else %}
-
+						
 						{% endif %}
-						<p class="myfooter" style="background: #black; color: orange;"><small>{{ info[1] }} лв</small></p>
+						#}
+
+						<p class="mfont3" style="background: #black; color: orange;"><small>{{ "%0.2f"|format(info[1]|float) }} лв</small></p>
 					</div>
 				</div>
 			</div>
