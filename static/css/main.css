@@ -6,8 +6,10 @@
 .myimage2 {
       height: 25px;
       width: 25px;
-      margin: auto 5px;
-      clear: both;
+      position: absolute;
+      right: 5px;
+      bottom: 15px;
+
 }
 
 .mycontainer {
@@ -36,15 +38,16 @@
 }
 
 .mfont {
-  text-align: center;
+  text-align: left;
 }
 
 .mfont p {
-  font-weight: bold;
-  letter-spacing: 1px;
   text-transform: uppercase;
-  font-family: rokkit;
+  font-family: cursive;
   margin: auto 0;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 2px;
 }
 
 .mfont2 {
@@ -60,4 +63,21 @@
   letter-spacing: 1px;
   font-family: rokkit;
   padding: 50px 0 0 0;
+}
+
+.mybottom {
+	position:absolute;
+  bottom:0;
+}
+
+.kindsandpic {
+  display: inline-block;
+}
+
+.restaurantheader {
+  text-align: center;
+  text-transform: uppercase;
+  background-color: orange;
+  color: black;
+  font-family: cursive;
 }

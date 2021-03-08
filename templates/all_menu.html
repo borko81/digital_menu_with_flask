@@ -38,7 +38,7 @@
 <body>
 	<div class="mycontainer">
 		{% for group_name, values in data.recepidata.items() %}
-			<h5 class="card-title textcenter"><b>{{ group_name }}</b></h5>
+			<h5 class="card-title textcenter mfont"><p>{{ group_name }}</p></h5>
 			{% for info in values %}
 			<div class="card">
 				<div class="card-horizontal">
@@ -50,7 +50,9 @@
 						{% endif %}
 					</div>
 					<div class="card-body infoboxstyle">
-						<p class="groupininfo">{{ group_name|upper }}</p>
+						{% if request.url[-3:] == 'all' %}
+							<p class="groupininfo">{{ group_name|upper }} </p>
+						{% endif %}
 						<h6 class="card-title mfont2" style="color:orange"><small>{{ info[0] }}</small></h6>
 						{# 
 						{% if info[3] %}
@@ -59,8 +61,10 @@
 						
 						{% endif %}
 						#}
-
+						
+						<div class="mybottom">
 						<p class="mfont3" style="background: #black; color: orange;"><small>{{ "%0.2f"|format(info[1]|float) }} лв</small></p>
+						</div>
 					</div>
 				</div>
 			</div>
