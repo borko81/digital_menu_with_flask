@@ -1,7 +1,10 @@
 from flask import Flask, render_template
+from flask_compress import Compress
 import fdb
 from base64 import b64encode
 from collections import defaultdict
+
+from query.queryies import queryies
 
 # ---------Hard code obj id ------------------
 '''
@@ -12,82 +15,58 @@ OBJ_ID = 1
 # ----------Flas configuration ---------------
 app = Flask(__name__)
 
+COMPRESS_MIMETYPES = ['text/html', 'text/css']
+COMPRESS_LEVEL = 6
+COMPRESS_MIN_SIZE = 500
+Compress(app)
+
 # ---------Database connector ----------------
-con = fdb.connect(dsn=r'C:\Users\borko\Desktop\Merdjan\MT.FDB',
-                  user='SYSDBA', password='masterkey')
-
-# ----------------SQL Selector ---------------------------
-RESTAURANT_NAME = f'''
-    SELECT obj.name_cyr from obj where obj.id = {OBJ_ID}
-'''
-
-SELECT = f'''
-select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
-from KITS
-inner join MENU
-inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
-where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = {OBJ_ID})
-order by 1
-'''
-
-SELECT_FROM_KINDS_ID = '''
-select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
-from KITS
-inner join MENU
-inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
-where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = %d) and kinds.id = %d
-order by 1
-'''
 
 
-TAKE_KINDS = f'''
-select
-distinct(kinds.id), kinds.name, kind_icons.icon
-from kits
-inner join kinds on kinds.id = kits.kind_id
-inner join menu
-on menu.kit_id = kits.id
-left join kind_icons on kind_icons.id = kinds.icon_id
-where MENU.OBJ_ID in (select obj.id from obj where obj.kasa = {OBJ_ID}) and kits.kind_id is not null
-order by 2
-'''
+def con_to_database():
+    ''' Use to create connection to database, close after session finished'''
+    con = fdb.connect(dsn=r'C:\Users\borko\Desktop\Merdjan\MT.FDB', user='SYSDBA', password='masterkey')
+    return con
 
 # ----------------Get result from database ----------------
 
 
 def get_obj_name():
-    cur = con.cursor()
-    cur.execute(RESTAURANT_NAME)
-    return cur.fetchone()
+    with con_to_database() as con:
+        cur = con.cursor()
+        cur.execute(queryies['RESTAURANT_NAME'] % (OBJ_ID,))
+        return cur.fetchone()
 
 
 def get_data_from_database(kinds=None):
-    cur = con.cursor()
-    if kinds is None:
-        cur.execute(SELECT)
-    else:
-        cur.execute(SELECT_FROM_KINDS_ID % (OBJ_ID, kinds))
-    result = defaultdict(list)
-    for line in cur.fetchall():
-        try:
-            image = b64encode(line[3]).decode("utf-8")
-        except TypeError:
-            image = ''
-        result[line[1]].append([line[0], line[2], image, line[4]])
-    return result
+    with con_to_database() as con:
+        cur = con.cursor()
+        if kinds is None:
+            cur.execute(queryies['SELECT'] % (OBJ_ID))
+        else:
+            cur.execute(queryies['SELECT_FROM_KINDS_ID'] % (OBJ_ID, kinds))
+        result = defaultdict(list)
+        for line in cur.fetchall():
+            try:
+                image = b64encode(line[3]).decode("utf-8")
+            except TypeError:
+                image = ''
+            result[line[1]].append([line[0], line[2], image, line[4]])
+        return result
 
 
 def get_kinds_from_database():
-    cur = con.cursor()
-    cur.execute(TAKE_KINDS)
-    result = {}
-    for line in cur.fetchall():
-        try:
-            image = b64encode(line[2]).decode("utf-8")
-        except TypeError:
-            image = ''
-        result[line[1]] = [line[0], image]
-    return dict(sorted(result.items()))
+    with con_to_database() as con:
+        cur = con.cursor()
+        cur.execute(queryies['TAKE_KINDS'] % (OBJ_ID))
+        result = {}
+        for line in cur.fetchall():
+            try:
+                image = b64encode(line[2]).decode("utf-8")
+            except TypeError:
+                image = ''
+            result[line[1]] = [line[0], image]
+        return dict(sorted(result.items()))
 
 
 def show_data(kinds=None):
@@ -121,4 +100,4 @@ def all_menu():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False)
