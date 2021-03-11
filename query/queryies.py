@@ -1,6 +1,6 @@
 queryies = {
         'RESTAURANT_NAME': '''SELECT obj.name_cyr from obj where obj.id = %d''',
-        'SELECT': '''select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
+        'SELECT': '''select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.menu_text
 		from KITS
 		inner join MENU
 		inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
@@ -8,7 +8,7 @@ queryies = {
 		order by 1
 		''',
     'SELECT_FROM_KINDS_ID': '''
-		select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.INFO
+		select KITS.NAME_CYR, KINDS.NAME, MENU.CENA, KITS.IMAGE, KITS.menu_text
 		from KITS
 		inner join MENU
 		inner join KINDS on KINDS.ID = KITS.KIND_ID on MENU.KIT_ID = KITS.ID
