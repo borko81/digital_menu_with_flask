@@ -65,7 +65,7 @@ def get_kinds_from_database():
                 image = b64encode(line[2]).decode("utf-8")
             except TypeError:
                 image = ''
-            result[line[1]] = [line[0], image]
+            result[line[1]] = [line[0], image, line[3]]
         return dict(sorted(result.items()))
 
 
@@ -100,4 +100,4 @@ def all_menu():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False)
+    app.run(host='0.0.0.0', debug=True)

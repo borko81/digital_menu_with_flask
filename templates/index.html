@@ -6,6 +6,7 @@
     <title>Menu</title>
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -18,14 +19,26 @@
             <div class="col-md-2 col-md-offset-5">
                 <div class="card" style="width: 100%;">
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item restaurantheader"><strong>Ресторант - името на ресторанта</strong></li>
-                        <li class="list-group-item mfont"><a href='{{ url_for("all_menu") }}' class="btn"><strong><p>ЗАРЕДИ ЦЯЛОТО МЕНЮ</p></strong></a></li>
+                    <li class="list-group-item restaurantheader"><strong>Ресторант - Мерджан</strong></li>
+                    
+                    <li class="list-group-item mfont"><a href='{{ url_for("all_menu") }}' class="btn"><strong><p>ЗАРЕДИ ЦЯЛОТО МЕНЮ</p></strong></a></li>
+                    
                     {% for group_name, gorup_id in data.items() %}
                         {% if gorup_id[1] != '' %}
-                            <li class="list-group-item mfont"><a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn"><p class="kindsandpic">{{ group_name }}</p>
-                            <p class="kindsandpic"><img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="..."></p></a></li>
+                            <li class="list-group-item mfont">
+                                <a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn">
+                                    <p class="kindsandpic">{{ group_name }}</p>
+                                    <p class="kindsandpic"><img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="..."></p>
+                                </a>
+                                <small class="quantiti_kinds">{{ gorup_id[2] }}</small>
+                            </li>
                         {% else %}
-                        <li class="list-group-item mfont"><a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn"><p>{{ group_name }}
+                             <li class="list-group-item mfont">
+                                <a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn">
+                                    <p>{{ group_name }}</p>
+                                </a>
+                                <small class="quantiti_kinds">{{ gorup_id[2] }}</small>
+                            </li>
                         {% endif %}
                     {% endfor %}
                   </ul>

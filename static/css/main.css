@@ -72,6 +72,7 @@
 
 .kindsandpic {
   display: inline-block;
+  font-size: 9px;
 }
 
 .restaurantheader {
@@ -80,4 +81,11 @@
   background-color: orange;
   color: black;
   font-family: cursive;
+}
+
+.quantiti_kinds {
+  font-size: 10px;
+  text-align: right;
+  position: absolute;
+  right: 37px;
 }
