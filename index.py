@@ -15,7 +15,7 @@ OBJ_ID = 1
 # ----------Flas configuration ---------------
 app = Flask(__name__)
 
-COMPRESS_MIMETYPES = ['text/html', 'text/css']
+COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
 COMPRESS_LEVEL = 6
 COMPRESS_MIN_SIZE = 500
 Compress(app)
@@ -25,7 +25,7 @@ Compress(app)
 
 def con_to_database():
     ''' Use to create connection to database, close after session finished'''
-    con = fdb.connect(dsn=r'C:\Users\borko\Desktop\Merdjan\MT.FDB', user='SYSDBA', password='masterkey')
+    con = fdb.connect(dsn=r'flask', user='SYSDBA', password='masterkey')
     return con
 
 # ----------------Get result from database ----------------
@@ -75,13 +75,13 @@ def show_data(kinds=None):
 # ----------------------URL's--------------------------
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     data = get_kinds_from_database()
     return render_template('index.html', data=data)
 
 
-@app.route('/kinds/<int:id>')
+@app.route('/kinds/<int:id>', methods=['GET'])
 def load_kinds(id):
     data = {
         'recepidata': show_data(kinds=id),
@@ -90,7 +90,7 @@ def load_kinds(id):
     return render_template('all_menu.html', data=data)
 
 
-@ app.route('/all')
+@ app.route('/all', methods=['GET'])
 def all_menu():
     data = {
         'recepidata': show_data(),
@@ -100,4 +100,4 @@ def all_menu():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False,threaded=True)

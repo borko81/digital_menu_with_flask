@@ -28,7 +28,7 @@
                             <li class="list-group-item mfont">
                                 <a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn">
                                     <p class="kindsandpic">{{ group_name }}</p>
-                                    <p class="kindsandpic"><img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="..."></p>
+                                    <p class="kindsandpic"><img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="{{ gorup_id[1] }}"></p>
                                 </a>
                                 <small class="quantiti_kinds">{{ gorup_id[2] }}</small>
                             </li>
