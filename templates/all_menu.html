@@ -47,7 +47,7 @@
 						{% if info[2] != '' %}
 							<img src="data:;base64,{{ info[2] }}" class="myimage" alt="...">
 						{% else %}
-							<img src="{{ url_for('static', filename='default.png') }}" class="myimage" alt="{{ data.rest_name[0] }}">
+							<img src="{{ url_for('static', filename='default.png') }}" class="myimage" alt="...">
 						{% endif %}
 					</div>
 					<div class="card-body infoboxstyle">
