@@ -52,18 +52,26 @@
 					</div>
 					<div class="card-body infoboxstyle">
 
+						{# If request url is endswith all, add group name #}
 						{% if request.url[-3:] == 'all' %}
 							<p class="groupininfo">{{ group_name|upper }}</p>
 						{% endif %}
-						<h6 class="card-title mfont2" style="color:orange"><small>{{ info[0] }}</small></h6>
+
+						{# Show name ot recepi #}
+						<h6 class="card-title mfont2" style="color:orange">{{ info[0] }}</h6>
 						 
+						 {# if recepi include menu text show it #}
 						{% if info[3] %}
 							<p class="card-text" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
 						{% endif %}
 						
+						{% if info[4] %}
+							<p class="mfont3" style="background: #black; color: orange;"><small><i>Алергени: {{ info[4] }}</i></small></p>
+						{% endif %}
 						
 						<div class="mybottom">
-						<p class="mfont3" style="background: #black; color: orange;"><small>{{ "%0.2f"|format(info[1]|float) }} лв</small></p>
+							{# here is a price cast to float with two digit after comma#}
+							<p class="mfont3" style="background: #black; color: orange;"><small>Цена: {{ "%0.2f"|format(info[1]|float) }} лв</small></p>
 						</div>
 					</div>
 				</div>

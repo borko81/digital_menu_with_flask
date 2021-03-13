@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_compress import Compress
+# from flask_compress import Compress
 import fdb
 from base64 import b64encode
 from collections import defaultdict
@@ -15,10 +15,10 @@ OBJ_ID = 1
 # ----------Flas configuration ---------------
 app = Flask(__name__)
 
-COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
-COMPRESS_LEVEL = 6
-COMPRESS_MIN_SIZE = 500
-Compress(app)
+# COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
+# COMPRESS_LEVEL = 6
+# COMPRESS_MIN_SIZE = 500
+# Compress(app)
 
 # ---------Database connector ----------------
 
@@ -51,7 +51,8 @@ def get_data_from_database(kinds=None):
                 image = b64encode(line[3]).decode("utf-8")
             except TypeError:
                 image = ''
-            result[line[1]].append([line[0], line[2], image, line[4]])
+            result[line[1]].append([line[0], line[2], image, line[4], line[5]])
+        print(result)
         return result
 
 
@@ -99,5 +100,5 @@ def all_menu():
     return render_template('all_menu.html', data=data)
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=False,threaded=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', debug=False, threaded=True)

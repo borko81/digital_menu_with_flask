@@ -1,0 +1,5 @@
+pip install flask
+pip install waitress
+
+# Run server
+waitress-serve --listen=*:5000 wsgi:app
