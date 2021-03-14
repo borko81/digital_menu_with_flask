@@ -14,6 +14,7 @@ OBJ_ID = 1
 
 # ----------Flas configuration ---------------
 app = Flask(__name__)
+app.SECRET_KEY = '3e7715708bbf945c800e3c310bc00dc1318ddd5de7efdcd8'
 
 # COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
 # COMPRESS_LEVEL = 6

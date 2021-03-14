@@ -48,6 +48,7 @@
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 2px;
+  margin: 5px;
 }
 
 .mfont2 {
@@ -66,6 +67,7 @@
 }
 
 .mybottom {
+  display: inline-block;
 	position:absolute;
   bottom:0;
 }
@@ -89,3 +91,9 @@
   position: absolute;
   right: 37px;
 }
+
+.show {
+  position: absolute;
+  right: 0px;
+}
+
