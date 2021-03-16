@@ -21,23 +21,27 @@
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item restaurantheader"><strong>Ресторант - Мерджан</strong></li>
                     
-                    <li class="list-group-item mfont"><a href='{{ url_for("all_menu") }}' class="btn"><strong><p>ЗАРЕДИ ЦЯЛОТО МЕНЮ</p></strong></a></li>
+                    <li class="list-group-item allmenu"><a href='{{ url_for("all_menu") }}' class="btn"><strong><p>ЗАРЕДИ ЦЯЛОТО МЕНЮ</p></strong></a></li>
                     
                     {% for group_name, gorup_id in data.items() %}
                         {% if gorup_id[1] != '' %}
                             <li class="list-group-item mfont">
+                                <div class="myButton">
+                                    <small class="inner">{{ gorup_id[2] }}</small>
+                                </div>
                                 <a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn">
                                     <p class="kindsandpic">{{ group_name }}</p>
                                     <p class="kindsandpic"><img src="data:;base64,{{ gorup_id[1] }}" class="myimage2" alt="{{ gorup_id[1] }}"></p>
                                 </a>
-                                <small class="quantiti_kinds">{{ gorup_id[2] }}</small>
                             </li>
                         {% else %}
                              <li class="list-group-item mfont">
+                                <div class="myButton">
+                                    <small class="inner">{{ gorup_id[2] }}</small>
+                                </div>
                                 <a href='{{ url_for("load_kinds", id=gorup_id[0]) }}' class="btn">
                                     <p>{{ group_name }}</p>
                                 </a>
-                                <small class="quantiti_kinds">{{ gorup_id[2] }}</small>
                             </li>
                         {% endif %}
                     {% endfor %}

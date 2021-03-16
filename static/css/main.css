@@ -41,6 +41,10 @@
   text-align: left;
 }
 
+.allmenu {
+  text-align: center;
+}
+
 .mfont p {
   text-transform: uppercase;
   font-family: cursive;
@@ -85,12 +89,22 @@
   font-family: cursive;
 }
 
-.quantiti_kinds {
-  font-size: 10px;
-  text-align: right;
-  position: absolute;
-  right: 37px;
+.myButton {
+  float: left;
+  font-family: rokkit;
+  color: black;
+	border-top: 20px solid transparent;
+	border-left: 30px solid orange;
+	border-bottom: 20px solid transparent;
+  width: 0;
+  position: relative;
 }
+.inner {
+  position: absolute;
+  top: -10px;
+  left: -26px;
+}
+
 
 .show {
   position: absolute;
