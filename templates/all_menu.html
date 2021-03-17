@@ -62,17 +62,20 @@
 						 
 						 {# if recepi include menu text show it #}
 						{% if info[3] %}
-							<p class="card-text" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
+						<div class="alerg">
+							<p class="mfont3" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
+						</div>
 						{% endif %}
 						
 						{% if info[4] %}
-							<p class="mfont3" style="background: #black; color: orange;"><small><i>Алергени: {{ info[4] }}</i></small></p>
+						<div class="alerg">
+								<p class="mfont3" style="background: #black; color: orange;"><small><i>алергени: {{ info[4] }}</i></small></p>
+						</div>
 						{% endif %}
 						
-						<div class="mybottom">
+						<div class="mbottom">
 							{# here is a price cast to float with two digit after comma#}
-							<p class="mfont3" style="background: #black; color: orange;"><small>Цена: {{ "%0.2f"|format(info[1]|float) }} лв</small></p>
-
+							<p class="mfont3" style="background: #black; color: orange;"><small>цена: {{ "%0.2f"|format(info[1]|float) }} лв</small></p>
 						</div>
 					</div>
 				</div>

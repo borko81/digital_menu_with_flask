@@ -64,16 +64,18 @@
 }
 
 .mfont3 {
-  font-weight: bold;
   letter-spacing: 1px;
   font-family: rokkit;
-  padding: 50px 0 5px 0;
 }
 
-.mybottom {
-  display: inline-block;
-	position:absolute;
+.mbottom {
+ 	position:absolute;
   bottom:0;
+}
+
+.alerg {
+  height: 15px;
+  margin-top:1px;
 }
 
 .kindsandpic {
