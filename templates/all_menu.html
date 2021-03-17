@@ -54,29 +54,30 @@
 
 						{# If request url is endswith all, add group name #}
 						{% if request.url[-3:] == 'all' %}
-							<p class="groupininfo">{{ group_name|upper }}</p>
+							<p class="groupininfo">~ {{ group_name|upper }} ~</p>
 						{% endif %}
 
 						{# Show name ot recepi #}
-						<h6 class="card-title mfont2" style="color:orange">{{ info[0] }}</h6>
+						<div>
+							<h6 class="card-title" style="color:orange">{{ info[0] }} </h6>
+							<p class="mfont3" style="background: #black; color: orange;">
+								цена: {{ "%0.2f"|format(info[1]|float) }} лв
+							</p>
+						</div>
 						 
-						 {# if recepi include menu text show it #}
+						{# if recepi include menu text show it #}
 						{% if info[3] %}
 						<div class="alerg">
-							<p class="mfont3" style="color:orange"><small><i>{{ info[3] }}</i></small></p>
+							<p class="mfont3" style="color:orange"><small><i>Количество: {{ info[3] }}</i></small></p>
 						</div>
 						{% endif %}
 						
 						{% if info[4] %}
 						<div class="alerg">
-								<p class="mfont3" style="background: #black; color: orange;"><small><i>алергени: {{ info[4] }}</i></small></p>
+								<p class="mfont3" style="background: #black; color: orange;"><small><i>Алергени: {{ info[4] }}</i></small></p>
 						</div>
 						{% endif %}
 						
-						<div class="mbottom">
-							{# here is a price cast to float with two digit after comma#}
-							<p class="mfont3" style="background: #black; color: orange;"><small>цена: {{ "%0.2f"|format(info[1]|float) }} лв</small></p>
-						</div>
 					</div>
 				</div>
 			</div>

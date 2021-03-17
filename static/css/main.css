@@ -9,7 +9,6 @@
       position: absolute;
       right: 5px;
       bottom: 15px;
-
 }
 
 .mycontainer {
@@ -31,10 +30,6 @@
 .card-horizontal {
   display: flex;
   flex: 1 1 auto;
-}
-
-.myfooter {
-  bottom: 0;
 }
 
 .mfont {
@@ -92,6 +87,8 @@
 }
 
 .myButton {
+  margin: 0;
+  padding: 0;
   float: left;
   font-family: rokkit;
   color: black;
@@ -108,8 +105,4 @@
 }
 
 
-.show {
-  position: absolute;
-  right: 0px;
-}
 
