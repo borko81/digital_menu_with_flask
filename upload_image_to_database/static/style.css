@@ -1,0 +1,138 @@
+:root {
+  --main-bg-color: white;
+  --color_button_and_header: lightgreen;
+}
+
+body {
+  font-family: helvetica;
+  background: #eee;
+  width: 100%;
+  margin: 0;
+}
+
+
+.main-container {
+    position: relative;
+    transform: translate3d(0,0,0);
+}
+
+
+navbar {
+  overflow: hidden;
+  background-color: var(--color_button_and_header);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: left;
+}
+
+navbar span {
+  float: left;
+  display: inline-block;
+  color: black;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+navbar button:hover {
+  background: #ddd;
+  color: black;
+}
+
+
+.mymain {
+  margin-top: 50px;
+  height: 100vh;
+}
+
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: left;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+.panel_show {
+  padding: 0 18px;
+  background-color: white;
+}
+
+
+#shazam th{
+  text-align: left;
+  color: black;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.flashes {
+  background-color: lightpink;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.loader {
+  background-color: var(--color_button_and_header);
+  width: 100%;
+  text-align: left;
+}
+
+.loader2 {
+  background-color: var(--color_button_and_header);
+  width: 100%;
+  text-align: left;
+}

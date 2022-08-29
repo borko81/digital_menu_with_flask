@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Load image</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<body>
+
+  <!-- Navbar menu -->
+  <navbar>
+    
+            <span>
+              <input type="text" name="name" placeholder="Enter recepi name" id="myInput" onkeyup="myFunction()">&nbsp;&nbsp;&nbsp;
+            </span>
+            <span>
+              <input type="button" name="shrink" value="Shrink" id="shrink">
+              <input type="button" name="expand" value="Expand" id="expand">
+            </span> 
+
+            <span>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <p class=flashes>
+                  {% for message in messages %}
+                    {{ message }}
+                  {% endfor %}
+                  </p>
+                {% endif %}
+            {% endwith %}
+          </span>
+
+  </navbar>
+
+<!-- result from base -->
+<div class="mymain">
+
+        {% for result, values in data.items() %}
+
+          <button class="accordion">{{ result }}</button>
+
+          <div class="panel">
+            <table id="shazam">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  {% for v in values %}
+                
+                  <tr>
+                      <td width="20%">{{ v['id'] }}</td>
+                      <td width="60%">{{ v['name'] }}</td>
+                      {% if v['has_img'] == '-' %}
+                        <td>&#9747;</td>
+                      {% else %}
+                        <td>&#10003;</td>
+                      {% endif %}
+                      <td width="20%">
+                        <input type="button" name="save_button" value="Image {{ v['name'] }}" id="load_image" data-id="{{ v['id'] }}" class="loader" >
+                      </td>
+                  </tr>
+
+                {% endfor %}
+              <tbody>
+
+            </table>
+          </div>
+
+        {% endfor %}
+</div>
+
+
+<!-- start with modal section -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Зарежда снимка...</p>
+    <form action="{{ url_for ('image') }}" enctype="multipart/form-data" method="POST">
+        <p><input type="file" name="filename"></p>
+        <p><input type="hidden" name="id_" id='recepi_id' value=""></p>
+        <p><input type="submit" name="" value='Save' class='loader2'></p>
+    </form>
+  </div>
+
+</div>
+
+<!-- Scripts -->
+<script>
+  let acc = document.getElementsByClassName("accordion");
+  let inner_pannel = document.getElementsByClassName("panel")
+  
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function() {
+      this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+    })
+  }
+
+  let expand = document.querySelector("#expand")
+  expand.addEventListener('click', function() {
+     for (let i = 0; i < inner_pannel.length; i++) {
+       
+            inner_pannel[i].style.display = "block"
+       
+      }
+  })
+
+  let shrink = document.querySelector("#shrink")
+  shrink.addEventListener('click', function() {
+     for (let i = 0; i < inner_pannel.length; i++) {
+       
+            inner_pannel[i].style.display = "none"
+       
+      }
+  })
+
+
+function open_dialog_for_insert() {
+
+      const id = $(this).data('id')
+      let recepi_id = document.getElementById('recepi_id')
+      recepi_id.value = id
+
+      let modal = document.getElementById("myModal")
+      let span = document.getElementsByClassName("close")[0]
+      modal.style.display = "block";
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+}
+
+
+let loaders = document.querySelectorAll('.loader');
+
+loaders.forEach(el => el.addEventListener('click', open_dialog_for_insert))
+
+  
+  function myFunction() {
+  let input, filter, table, tr, td, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("shazam");
+  let tbody = table.getElementsByTagName('tbody')[0]
+  tr = tbody.getElementsByTagName("tr");
+
+  let button_harmony = document.querySelectorAll('.accordion')
+  // for (let i = 0; i < button_harmony.length; i++) {
+  //   button_harmony[i].style.display = "none"
+  // }
+
+  for (let i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+
+</script>
+</body>
+</html>
